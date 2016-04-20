@@ -32,7 +32,7 @@ Chargify.prototype.request = function(options, callback) {
             try {
                 res.body = body = JSON.parse(body);
             } catch(e) {
-                if (!body || body.toLowerCase() === 'OK') {
+                if (!body || body.toLowerCase() === 'ok') {
                     return callback(null, undefined);
                 }                
                 var err = new Error('JSON_PARSE_FAILED')
