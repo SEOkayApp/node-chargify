@@ -33,9 +33,9 @@ Chargify.prototype.request = function(options, callback) {
             try {
                 res.body = body = JSON.parse(body);
             } catch(e) {
-				var err = new Error('JSON_PARSE_FAILED');
-				err.body = body;
-				throw err;
+		          var err = new Error('JSON_PARSE_FAILED');
+		          err.body = body;
+		          callback(err);
             }
         }
         callback(err, res, body);
