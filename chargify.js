@@ -30,8 +30,8 @@ Chargify.prototype.request = function(options, callback) {
         if (err) return callback(err);
         if (res.headers['content-type'] && 
         res.headers['content-type'].indexOf('application/json') !== -1 && 
-        typeof body !== 'object' 
-        && body !== '200 OK') {
+        typeof body !== 'object' && 
+        body !== '200 OK') {
             try {
                 res.body = body = JSON.parse(body);
             } catch(e) {
