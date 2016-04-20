@@ -29,13 +29,15 @@ Chargify.prototype.request = function(options, callback) {
     request(options, function(err, res, body) {
         if (err) return callback(err);
         if (res.headers['content-type'] && res.headers['content-type'].indexOf('application/json') !== -1 && typeof body !== 'object') {
-            if(!body) return callback(null, undefined);
             try {
                 res.body = body = JSON.parse(body);
             } catch(e) {
-		          var err = new Error('JSON_PARSE_FAILED');
-		          err.body = body;
-		          callback(err);
+                if (!body || body.toLowerCase() === 'OK') {
+                    return callback(null, undefined);
+                }                
+                var err = new Error('JSON_PARSE_FAILED')
+                err.body = body;
+                callback(err);
             }
         }
         callback(err, res, body);
